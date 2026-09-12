@@ -2,7 +2,7 @@
 const API_BASE_URL =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:5000"
-    : "https://YOUR-BACKEND-DOMAIN.onrender.com"; //locally run and then to be replaced after being deployed
+    : "https://url-shortner-126s.onrender.com/"; //locally run and then to be replaced after being deployed
 
 // ---- Element references ----
 const form = document.getElementById("shorten-form");
@@ -23,7 +23,7 @@ const recentList = document.getElementById("recent-list");
 const recentEmpty = document.getElementById("recent-empty");
 const refreshBtn = document.getElementById("refresh-btn");
 
-//Helpers
+//gHelpers
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.classList.remove("hidden");
