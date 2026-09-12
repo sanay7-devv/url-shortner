@@ -2,7 +2,7 @@
 const API_BASE_URL =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:5000"
-    : "https://url-shortner-126s.onrender.com/"; //locally run and then to be replaced after being deployed
+    : "https://url-shortner-126s.onrender.com"; //locally run and then to be replaced after being deployed
 
 // ---- Element references ----
 const form = document.getElementById("shorten-form");
