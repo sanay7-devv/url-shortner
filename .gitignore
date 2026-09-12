@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables & secrets (NEVER commit these!)
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Personal notes & documentation
+Backend.md
+backend/Backend.md
+ENV_AND_DATABASE_GUIDE.md
+backend/ENV_AND_DATABASE_GUIDE.md
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

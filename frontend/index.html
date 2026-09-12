@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="intro">
+      <h1>URL Shortner.</h1>
+      <p class="kicker">Link compression</p>
+      <p class="lede">
+        Paste any web address. Fern stores it in the database and hands you back a
+        6-character claim code that redirects to the original, every time it's opened.
+      </p>
+    </header>
+
+    <main class="panel">
+      <form id="shorten-form" class="form" novalidate>
+        <label for="url-input" class="field-label">Long URL</label>
+        <input
+          id="url-input"
+          name="originalUrl"
+          type="text"
+          placeholder="https://example.com/a/very/long/path?with=params"
+          autocomplete="off"
+          spellcheck="false"
+          required
+        />
+
+        <button type="button" id="toggle-custom" class="link-btn">+ custom code</button>
+
+        <div id="custom-code-row" class="field-row hidden">
+          <label for="custom-code-input" class="field-label">Custom code (optional)</label>
+          <input
+            id="custom-code-input"
+            name="customCode"
+            type="text"
+            placeholder="my-launch"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="20"
+          />
+        </div>
+
+        <button type="submit" id="submit-btn" class="submit-btn">
+          <span class="btn-label">Snip it</span>
+        </button>
+
+        <p id="form-error" class="error-msg hidden" role="alert"></p>
+      </form>
+
+      <div id="result-ticket" class="ticket hidden">
+        <div class="ticket-body">
+          <p class="ticket-eyebrow">Your short link</p>
+          <a id="result-short-url" class="ticket-code" href="#" target="_blank" rel="noopener"></a>
+          <p class="ticket-original" id="result-original-url"></p>
+          <div class="ticket-stats">
+            <span><strong id="result-clicks">0</strong> clicks</span>
+            <button type="button" id="copy-btn" class="copy-btn">Copy link</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="recent-wrap">
+      <div class="recent-head">
+        <h2>Recently snipped</h2>
+        <button type="button" id="refresh-btn" class="link-btn">refresh</button>
+      </div>
+      <ul id="recent-list" class="recent-list"></ul>
+      <p id="recent-empty" class="recent-empty hidden">Nothing shortened yet — be the first.</p>
+    </section>
+
+    <footer class="foot">
+      <p>CSA 2026 Tech Team Inductions - Sanay Shah</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

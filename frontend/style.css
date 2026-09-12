@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+
+
+:root {
+  --bg: #0b0f17;
+  --panel: #131b26;
+  --panel-elevated: #1a2434;
+  --ink: #f1f5f9;
+  --ink-soft: #94a3b8;
+  --accent: #6366f1;
+  --accent-dark: #4f46e5;
+  --accent-light: #818cf8;
+  --stub: #f59e0b;
+  --line: #1e293b;
+  --line-strong: #334155;
+  --input-bg: #0b111a;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 64px 24px 40px;
+}
+
+/* ---------- Intro ---------- */
+.intro {
+  margin-bottom: 40px;
+}
+
+.kicker {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  color: var(--accent-light);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  font-family: "Lexend", sans-serif;
+  font-weight: 500;
+  width: fit-content;
+  color: #ffffff;
+  text-align: center;  /*aligns this in centre */
+  font-size: clamp(2.1rem, 80px, 100px);  /* clamp automatically adapts to screen sizes*/
+  line-height: 1.08;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+
+  /* trying the typewriter effect */
+  border-right: 3px solid var(--accent-light);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+           typing 2s,
+           cursor 0.4s step-end 5;   /* not doing infinte bad for eyes */
+}
+
+@keyframes cursor
+{
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent-light); }
+}
+
+@keyframes typing 
+{
+  from{width: 0;}
+  to{width: 100%;}
+}
+
+.lede {
+  max-width: 46ch;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+/* ---------- Form panel ---------- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--input-bg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"]::placeholder {
+  color: #475569;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--input-bg);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.link-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--accent-light);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.link-btn:hover {
+  color: #c7d2fe;
+}
+
+.field-row {
+  margin-top: 2px;
+  margin-bottom: 6px;
+}
+
+.field-row.hidden,
+.ticket.hidden,
+.error-msg.hidden,
+.recent-empty.hidden {
+  display: none;
+}
+
+.submit-btn {
+  margin-top: 14px;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.submit-btn:hover {
+  background: var(--accent-dark);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+}
+
+.submit-btn:active {
+  transform: scale(0.99);
+}
+
+.submit-btn:disabled {
+  background: #334155;
+  color: #64748b;
+  box-shadow: none;
+  cursor: progress;
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.88rem;
+  margin: 8px 0 0;
+}
+
+/* ---------- Result "ticket" ---------- */
+.ticket {
+  margin-top: 24px;
+  position: relative;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.07) 0%, rgba(19, 27, 38, 0.95) 40%);
+  border: 1.5px dashed rgba(245, 158, 11, 0.45);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+}
+
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--bg);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket::before {
+  left: -10px;
+}
+
+.ticket::after {
+  right: -10px;
+}
+
+.ticket-body {
+  padding: 22px 26px;
+}
+
+.ticket-eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  color: var(--stub);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ticket-code {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #ffffff;
+  text-decoration: none;
+  word-break: break-all;
+  margin-bottom: 8px;
+  transition: color 0.15s ease;
+}
+
+.ticket-code:hover {
+  color: var(--accent-light);
+  text-decoration: underline;
+}
+
+.ticket-original {
+  margin: 0 0 16px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  word-break: break-all;
+}
+
+.ticket-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(245, 158, 11, 0.3);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.copy-btn.copied 
+{
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- Recent list ---------- */
+.recent-wrap {
+  margin-top: 42px;
+}
+
+.recent-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.recent-head h2 {
+  font-family: "Lexend", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.recent-item:hover {
+  border-color: var(--line-strong);
+}
+
+.recent-item-main {
+  min-width: 0;
+}
+
+.recent-item-code 
+{
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--accent-light);
+  text-decoration: none;
+}
+
+.recent-item-code:hover 
+{
+  text-decoration: underline;
+}
+
+.recent-item-original {
+  margin: 3px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-item-clicks {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 4px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.recent-empty {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  margin-top: 56px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.foot p {
+  margin: 0;
+  font-size: 0.8rem;
+  text-align: center; /* aliginig this in centre */
+  color: #64748b;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .wrap {
+    padding: 40px 18px 32px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .ticket-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .recent-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
