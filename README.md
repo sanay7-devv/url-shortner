@@ -6,9 +6,8 @@ A full-stack, responsive URL shortener web application. Paste any long web addre
 
 ## 🔗 Live Links
 
-- **Live Application (Frontend):** [https://your-frontend-url.vercel.app](https://your-frontend-url.vercel.app) *(Replace with your live URL)*
-- **API Base URL (Backend):** [https://your-backend-url.onrender.com](https://your-backend-url.onrender.com) *(Replace with your live URL)*
-- **GitHub Repository:** [https://github.com/your-username/url-shortener](https://github.com/your-username/url-shortener)
+- **Live Application (Frontend):** [https://url-shortner-nine-snowy.vercel.app/](https://your-frontend-url.vercel.app)
+- **API Base URL (Backend):** [https://url-shortner-126s.onrender.com](https://your-backend-url.onrender.com)
 
 ---
 
@@ -41,8 +40,8 @@ A full-stack, responsive URL shortener web application. Paste any long web addre
 
 ### Database & Hosting
 - **Database:** MongoDB Atlas (Cloud NoSQL database with automated indexing).
-- **Backend Hosting:** Render / Railway.
-- **Frontend Hosting:** Vercel / Netlify / GitHub Pages.
+- **Backend Hosting:** Render
+- **Frontend Hosting:** Vercel
 
 ---
 
@@ -108,13 +107,12 @@ url-shortener/
 │   ├── .env.example                # Sample environment variables
 │   ├── .gitignore                  # Git ignore rules for node_modules and .env
 │   ├── package.json                # Dependencies and backend scripts
-│   └── Backend.md                  # Backend and database configuration documentation
 ├── frontend/
 │   ├── index.html                  # Main user interface
 │   ├── style.css                   # Custom styles, responsive layout, animations
 │   └── script.js                   # Client-side logic, API calls, and event listeners
 ├── .gitignore                      # Root gitignore
-└── README.md                       # Project documentation & assignment report
+
 ```
 
 ---
@@ -184,124 +182,44 @@ Defined in [`backend/src/models/Url.js`](backend/src/models/Url.js):
 
 ---
 
-## 💻 Local Development Setup
+## 🚀 Deployment Process Followed
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v16 or higher)
-- [Git](https://git-scm.com/)
-- A free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account
+Here is the step-by-step process I followed to deploy this full-stack application to production:
 
----
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/your-username/url-shortener.git
-cd url-shortener
-```
+### 1. Database Provisioning (MongoDB Atlas)
+- Created a shared cluster on **MongoDB Atlas** for cloud database management.
+- Configured database credentials and configured Network Access with `0.0.0.0/0` to allow secure connections from cloud host environments.
+- Obtained the connection URI string to connect Mongoose with the hosted database.
 
 ---
 
-### Step 2: Configure & Start Backend
-```bash
-# Navigate to backend directory
-cd backend
-
-# Install dependencies
-npm install
-
-# Create environment configuration file
-cp .env.example .env   # On Windows PowerShell: copy .env.example .env
-```
-
-Open `backend/.env` and fill in your values:
-```env
-PORT=5000
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/shortener?retryWrites=true&w=majority
-BASE_URL=http://localhost:5000
-ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:5500,http://localhost:5000
-```
-
-Start the backend server:
-```bash
-npm start
-```
-*The backend will boot on `http://localhost:5000`.*
+### 2. Backend Deployment on [Render]
+- Connected the GitHub repository (`sanay7-devv/url-shortner`) to a new **Web Service** on Render.
+- Configured the service settings:
+  - **Root Directory:** `backend`
+  - **Runtime:** `Node`
+  - **Build Command:** `npm install`
+  - **Start Command:** `npm start`
+- Configured production environment variables on Render:
+  - `MONGODB_URI`: Secure connection string to MongoDB Atlas.
+  - `BASE_URL`: `https://url-shortner-126s.onrender.com`
+  - `ALLOWED_ORIGINS`: Configured to allow cross-origin requests from the Vercel frontend.
+- Verified backend deployment and verified the `/health` endpoint at `https://url-shortner-126s.onrender.com/health`.
 
 ---
 
-### Step 3: Run Frontend
-Open a new terminal window:
-```bash
-cd frontend
-
-# Option A: Serve locally using Node's serve utility
-npx serve .
-
-# Option B: Or open frontend/index.html with VS Code Live Server
-```
-*The frontend automatically targets `http://localhost:5000` when running locally.*
+### 3. Frontend Deployment on [Vercel]
+- Configured the API endpoint targeting in [`frontend/script.js`](frontend/script.js) to dynamically connect to the live Render backend (`https://url-shortner-126s.onrender.com`).
+- Connected the repository to **Vercel**:
+  - **Root Directory:** `frontend`
+  - **Framework Preset:** `Other` (Vanilla HTML/CSS/JS)
+- Deployed the client-side files to obtain the production URL: [`https://url-shortner-nine-snowy.vercel.app/`](https://url-shortner-nine-snowy.vercel.app/).
 
 ---
 
-## 🚀 Production Deployment Guide
-
-### Step 1: Set up MongoDB Atlas (Cloud Database)
-1. Go to [MongoDB Atlas](https://cloud.mongodb.com/) and create a free Shared Cluster.
-2. In **Database Access**, create a database user with username and password.
-3. In **Network Access**, click **Add IP Address** and select **Allow Access from Anywhere (`0.0.0.0/0`)** so hosting providers can connect.
-4. Go to **Database → Connect → Drivers**, copy the connection string and insert your password and database name:
-   `mongodb+srv://<username>:<password>@cluster0.mongodb.net/urlshortener?retryWrites=true&w=majority`
-
----
-
-### Step 2: Deploy Backend to [Render](https://render.com)
-1. Push your repository to **GitHub**.
-2. Sign in to Render and click **New + → Web Service**.
-3. Connect your GitHub repository.
-4. Configure the service settings:
-   - **Name:** `url-shortener-backend`
-   - **Root Directory:** `backend`
-   - **Runtime:** `Node`
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-5. In the **Environment Variables** section, add:
-   - `MONGODB_URI` = *(Your MongoDB Atlas connection string from Step 1)*
-   - `BASE_URL` = `https://<your-service-name>.onrender.com` *(Render assigned URL)*
-   - `ALLOWED_ORIGINS` = `*` *(or your frontend URL once deployed)*
-6. Click **Deploy Web Service**.
-7. Test by visiting `https://<your-backend-url>.onrender.com/health` in your browser.
-
----
-
-### Step 3: Deploy Frontend to [Vercel](https://vercel.com) or [Netlify](https://netlify.com)
-
-#### Updating API Base URL in Frontend:
-Before or after deploying the backend, update line 5 of [`frontend/script.js`](frontend/script.js):
-```javascript
-const API_BASE_URL =
-  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-    ? "http://localhost:5000"
-    : "https://your-backend-name.onrender.com"; // <-- Paste your Render backend URL here
-```
-
-#### Deploying on Vercel:
-1. Log in to [Vercel](https://vercel.com) and click **Add New → Project**.
-2. Select your GitHub repository.
-3. In the project setup:
-   - **Root Directory:** Edit and choose `frontend`.
-   - **Framework Preset:** Select `Other`.
-4. Click **Deploy**.
-5. Copy your live Vercel URL (e.g. `https://url-shortener-xxx.vercel.app`).
-
----
-
-### Step 4: Final Connection (CORS Security)
-1. Go back to your backend service dashboard on **Render**.
-2. Update the `ALLOWED_ORIGINS` environment variable with your frontend domain:
-   ```env
-   ALLOWED_ORIGINS=https://url-shortener-xxx.vercel.app
-   ```
-3. Save changes. Render will redeploy automatically with strict CORS protection.
+### 4. Integration & CORS Verification
+- Updated backend CORS settings via the `ALLOWED_ORIGINS` environment variable on Render with the production Vercel domain (`https://url-shortner-nine-snowy.vercel.app`).
+- Tested end-to-end functionality including URL compression, custom vanity codes, instant 302 redirections, clipboard copying, and live click tracking.
 
 ---
 
@@ -314,8 +232,3 @@ const API_BASE_URL =
 
 ---
 
-## 👤 Author & Assignment Details
-
-- **Student / Author:** Sagar Shah
-- **Assignment:** URL Shortener Full-Stack Web Application
-- **Date:** September 2026
