@@ -29,6 +29,12 @@ app.use(
 );
 app.use(express.json());
 
+// Normalize paths with multiple leading slashes (e.g. //6HE0X2 -> /6HE0X2)
+app.use((req, res, next) => {
+  req.url = req.url.replace(/^\/+/, "/");
+  next();
+});
+
 // ---- Routes ----
 app.get("/", (req, res) => {
   res.status(200).json({

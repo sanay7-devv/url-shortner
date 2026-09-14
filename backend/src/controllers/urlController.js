@@ -6,6 +6,13 @@ const SHORT_CODE_LENGTH = 6;
 const MAX_GENERATION_ATTEMPTS = 5;
 
 /**
+ * Returns the base URL with any trailing slash stripped to prevent double-slash URLs (e.g. //abc)
+ */
+function getBaseUrl() {
+  return (process.env.BASE_URL || "http://localhost:5000").replace(/\/+$/, "");
+}
+
+/**
  * Generates a short code that isn't already in the database.
  * Collisions are astronomically rare at 6 chars (~56 billion combinations)
  * but we still guard against them instead of trusting luck.
@@ -40,7 +47,7 @@ async function createShortUrl(req, res) {
     if (existingForUrl && !customCode) {
       return res.status(200).json({
         shortCode: existingForUrl.shortCode,
-        shortUrl: `${process.env.BASE_URL}/${existingForUrl.shortCode}`,
+        shortUrl: `${getBaseUrl()}/${existingForUrl.shortCode}`,
         originalUrl: existingForUrl.originalUrl,
         clicks: existingForUrl.clicks,
         reused: true,
@@ -72,7 +79,7 @@ async function createShortUrl(req, res) {
 
     return res.status(201).json({
       shortCode: doc.shortCode,
-      shortUrl: `${process.env.BASE_URL}/${doc.shortCode}`,
+      shortUrl: `${getBaseUrl()}/${doc.shortCode}`,
       originalUrl: doc.originalUrl,
       clicks: doc.clicks,
       reused: false,
@@ -150,7 +157,7 @@ async function listRecentUrls(req, res) {
     return res.status(200).json(
       docs.map((doc) => ({
         shortCode: doc.shortCode,
-        shortUrl: `${process.env.BASE_URL}/${doc.shortCode}`,
+        shortUrl: `${getBaseUrl()}/${doc.shortCode}`,
         originalUrl: doc.originalUrl,
         clicks: doc.clicks,
         createdAt: doc.createdAt,

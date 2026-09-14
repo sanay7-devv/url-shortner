@@ -36,7 +36,7 @@ function clearError() {
 
 function setLoading(isLoading) {
   submitBtn.disabled = isLoading;
-  submitBtn.querySelector(".btn-label").textContent = isLoading ? "Snipping..." : "Snip it";
+  submitBtn.querySelector(".btn-label").textContent = isLoading ? "Ferning it..." : "Fern it";
 }
 
 function isLikelyUrl(value) {
