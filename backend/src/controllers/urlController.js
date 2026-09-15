@@ -2,7 +2,7 @@ const { nanoid } = require("nanoid");
 const Url = require("../models/Url");
 const { isValidHttpUrl } = require("../utils/validateUrl");
 
-const SHORT_CODE_LENGTH = 7;
+const SHORT_CODE_LENGTH = 6;
 const MAX_GENERATION_ATTEMPTS = 5;
 
 /**
