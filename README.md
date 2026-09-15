@@ -6,7 +6,7 @@ A full-stack, responsive URL shortener web application. Paste any long web addre
 
 ## 🔗 Live Links
 
-- **Live Application (Frontend):** [https://url-shortner-nine-snowy.vercel.app/](https://your-frontend-url.vercel.app)
+- **Live Application (Frontend):** [https://url-shortner-nine-snowy.vercel.app](https://url-shortner-nine-snowy.vercel.app)
 - **API Base URL (Backend):** [https://url-shortner-126s.onrender.com](https://your-backend-url.onrender.com)
 
 ---
